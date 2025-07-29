@@ -8,49 +8,41 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-
-MyJobMag = "https://www.myjobmag.co.ke/jobs-by-field/information-technology"
-Arcdev = "https://arc.dev/remote-jobs" 
-PythonJobBoard = "https://www.python.org/jobs/"
-Remotiveio  = "https://remotive.com/remote-jobs/software-dev"
-
-driver.get("https://duckduckgo.com/")
-
-# wait for search bar and type 
-search_box = WebDriverWait(driver, 10).until(
-    EC.visibility_of_element_located((By.NAME, "q")))
-# TYPE IN THE SERCH BAR AND
-search_box.send_keys(MyJobMag + Keys.ENTER)
-time.sleep(5)
-#scroll to load more result
-#find all result container
-#Extract title link and snipet from the conainers
-#close the driver
-
-driver.get(Arcdev)
-
-# wait for search bar and type 
-# TYPE IN THE SERCH BAR AND 
-#scroll to load more result
-#find all result container
-#Extract title link and snipet from the conainers
-#close the driver
-
-driver.get(PythonJobBoard)
-
-# wait for search bar and type 
-# TYPE IN THE SERCH BAR AND 
-#scroll to load more result
-#find all result container
-#Extract title link and snipet from the conainers
-#close the driver
-
-driver.get(Remotiveio)
-
-# wait for search bar and type 
-# TYPE IN THE SERCH BAR AND 
-#scroll to load more result
-#find all result container
-#Extract title link and snipet from the conainers
-#close the driver
+class Jobboard:
+    def __init__(self,site,title,requirements,dateposted):
+        self.site = site
+        self.title = title
+        self.requirements = requirements
+        self.dateposted = dateposted
+                
+        
+    #start your browser and type in your search
+    def start_browser(self):
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        self.driver.get =("https://duckduckgo.com/")
+        self.search_box = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.NAME, "q")))
+        
+    
+    #close browser
+    def close_browser(self):
+        self.driver.quit()
+        
+    #open serach boards and search for python jobs
+    def job_board_search(self):
+        self.boards = ["myjobmag","arcdev","pythonorg","remotive"]
+        
+        for board in self.boards:
+            #search for job board
+            self.search_box.send_keys("board" + Keys.ENTER)
+            time.sleep(5)
+            
+            #open the first  and open
+            first_result = self.driver.find_element(By.CSS_SELECTOR, 'a')
+            
+            #
+            
+            
+            
+           
+        
+    
